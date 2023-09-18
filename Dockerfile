@@ -21,8 +21,9 @@ RUN apt-get update && apt-get install -y libcgi-pm-perl
 RUN cpan CGI::Safe
 RUN cpan String::Util
 
+RUN cpan CGI-Plus-0.15.tar.gz
 #RUN cpan CGI::Plus
-RUN cpan -T CGI::Plus
+#RUN cpan -T CGI::Plus
 
 
 RUN cpan CGI::Session
@@ -67,10 +68,10 @@ COPY custom-vhost.conf /etc/apache2/sites-available/
 
 
 # Set permissions for Apache user (www-data) to access the application files
- RUN chown -R www-data:www-data /var/www/html/
+RUN chown -R www-data:www-data /var/www/html/
 
 #Enable your custom virtual host:
- RUN a2ensite custom-vhost
+RUN a2ensite custom-vhost
 
 
 # Enable CGI execution and set the handler for .cgi and .pl files
@@ -78,11 +79,8 @@ RUN sed -i 's/Options Indexes FollowSymLinks/Options Indexes FollowSymLinks Exec
 RUN echo 'AddHandler cgi-script .cgi .pl' >> /etc/apache2/apache2.conf
 
 #Enable perl files 
- #RUN a2enmod cgid
+RUN a2enmod cgid
 
-
-# Set the executable permission on Perl scripts
-#RUN chmod +x /var/www/html/cgi-bin/*.pl
 
 # Set the executable permission on Perl scripts in the cgi-bin directory and its subdirectories
 RUN find /var/www/html/cgi-bin -type f -name "*.pl" -exec chmod +x {} \;
@@ -92,16 +90,3 @@ EXPOSE 80
 
 # Start Apache web server
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
-
-
-
-
-
-
-
-
-# Make all .pl files executable in the cgi-bin directory and its subdirectories
-#RUN find /srv/www/cgi-bin/mysql/. -type f -name "*.pl" -exec chmod +x {} \;
-
-
-

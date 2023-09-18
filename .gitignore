@@ -541,7 +541,7 @@ UpgradeLog*.htm
 FakesAssemblies/
 
 # macOS garbage
-.DS_Store
+*/**/.DS_Store
 
 # QtCreator && CodeBlocks
 *.cbp
