@@ -1,0 +1,22 @@
+version: '3'
+services:
+  webapp:
+    build:
+      context: ../
+    ports:
+      - "80:80"
+  adminer:
+    image: library/adminer
+    ports:
+      - 8080:8080
+  database:
+    container_name: database-maria
+    image: mariadb:10
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+    volumes:
+      - ./mysql-lib:/var/lib/mysql
+      - ./database:/database
+      - ./conf:/etc/mysql/conf.d
