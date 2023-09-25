@@ -3,7 +3,7 @@ FROM evadb-base:latest AS buildBase
 
 # Copy your Perl web application files to the Apache document root
 # OLD: COPY ./cgi-bin /var/www/html/cgi-bin
-COPY ./cgi-bin /usr/lib/cgi-bin
+COPY ./cgi-bin /var/www/html/cgi-bin
 COPY ./css_js /var/www/html/css_js
 
 

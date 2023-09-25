@@ -23,8 +23,6 @@ RUN cpan String::Util
 
 RUN cpan CGI-Plus-0.15.tar.gz
 #RUN cpan CGI::Plus
-#RUN cpan -T CGI::Plus
-
 
 RUN cpan CGI::Session
 RUN cpan DBI
@@ -60,3 +58,4 @@ RUN cpan Log::Dispatch::File
 
 # TODO
 COPY ./Plus.pm /usr/local/lib/perl5/site_perl/5.38.0/CGI
+COPY ./serve-cgi-bin.conf /etc/apache2/conf-available/serve-cgi-bin.conf
